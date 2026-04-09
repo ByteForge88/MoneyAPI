@@ -10,6 +10,8 @@ use byteforge88\moneyapi\api\Money;
 
 use byteforge88\moneyapi\database\Database;
 
+use byteforge88\moneyapi\command\BalanceCommand;
+
 class MoneyAPI extends PluginBase {
     
     protected static self $instance;
@@ -22,7 +24,11 @@ class MoneyAPI extends PluginBase {
     }
     
     protected function onEnable() : void{
-
+        $server = $this->getServer();
+        
+        $server->getCommandMap()->registerAll("MoneyAPI", [
+            new BalanceCommand($this),
+        ]);
     }
     
     public function onDisable() : void{
@@ -56,6 +62,7 @@ class MoneyAPI extends PluginBase {
     public function setBalance(Player|string $player, int $amount = 1) : void{
         $this->money->setBalance($player, $amount);
     }
+    
     public function formatMoney(int $amount) : string{
         return $this->money->formatMoney($amount);
     }

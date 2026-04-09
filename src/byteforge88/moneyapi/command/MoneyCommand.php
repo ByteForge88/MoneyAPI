@@ -16,6 +16,8 @@ use byteforge88\moneyapi\MoneyAPI;
  */
 abstract class MoneyCommand extends Command implements PluginOwned {
     
+    protected MoneyAPI $plugin;
+    
     public function __construct(string $name, MoneyAPI $plugin) {
         parent::__construct($name);
         $this->plugin = $plugin;

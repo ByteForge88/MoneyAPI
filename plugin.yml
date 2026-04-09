@@ -3,3 +3,7 @@ version: 1.0.0
 author: ByteForge88
 api: 5.36.0
 main: byteforge88\moneyapi\MoneyAPI
+
+permissions:
+  moneyapi.balance:
+    default: true
