@@ -6,17 +6,24 @@ namespace byteforge88\moneyapi;
 
 use pocketmine\plugin\PluginBase;
 
+use pocketmine\player\Player;
+
+use pocketmine\utils\Config;
+
 use byteforge88\moneyapi\api\Money;
 
 use byteforge88\moneyapi\database\Database;
 
 use byteforge88\moneyapi\command\BalanceCommand;
+use byteforge88\moneyapi\command\SeeBalanceCommand;
 
 class MoneyAPI extends PluginBase {
     
     protected static self $instance;
     
     private Money $money;
+    
+    public Config $messages;
     
     protected function onLoad() : void{
         self::$instance = $this;
@@ -26,8 +33,16 @@ class MoneyAPI extends PluginBase {
     protected function onEnable() : void{
         $server = $this->getServer();
         
+        $this->saveDefaultConfig();
+        $this->saveResource("messages.yml");
+        
+        $this->messages = new Config($this->getDataFolder() . "messages.yml");
+        
+        $server->getPluginManager()->registerEvents(new EventListener(), $this);
+        
         $server->getCommandMap()->registerAll("MoneyAPI", [
             new BalanceCommand($this),
+            new SeeBalanceCommand($this)
         ]);
     }
     
@@ -40,10 +55,10 @@ class MoneyAPI extends PluginBase {
     }
     
     public function isNew(Player|string $player) : bool{
-        return $this->money->isNew($$player);
+        return $this->money->isNew($player);
     }
     
-    public function insertIntoDatabase(Player|string $player, string $starting_balance = 1000) : void{
+    public function insertIntoDatabase(Player|string $player, int $starting_balance = 1000) : void{
         $this->money->insertIntoDatabase($player, $starting_balance);
     }
     

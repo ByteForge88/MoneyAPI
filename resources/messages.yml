@@ -1,0 +1,26 @@
+# Message when a user tries to run a command when they're not in-game
+not-ingame: "use this command in-game!"
+
+# Message displaying your current balance
+user-balance: "You currently have {balance}!"
+
+# Message displaying someone else's balance
+other-balance: "{player} balance: {balance}"
+
+# Message when a player doesn't exist
+player-not-found: "Player not found!"
+
+# Message when amount inputed in the command line is not an integer
+amount-must-be-numeric: "Amount must be a number!"
+
+# Message when amount inputed in the command line is negative
+amount-must-be-positive: "Amount must be larger than 0!"
+
+# Message when a player tries to pay someone but they're broke
+user-is-broke: "You don't have enough to pay this person"
+
+# Message when a player successfully pay's another player
+successfully-paid-player: "You have paid {player} {amount}!"
+
+# Message when a player successfully recieved payment
+successfully-recieved-money: "{player} has paid you {amount}!"

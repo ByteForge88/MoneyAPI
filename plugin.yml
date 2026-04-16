@@ -7,3 +7,7 @@ main: byteforge88\moneyapi\MoneyAPI
 permissions:
   moneyapi.balance:
     default: true
+  moneyapi.seebalance:
+    default: true
+  moneyapi.pay:
+    default: true

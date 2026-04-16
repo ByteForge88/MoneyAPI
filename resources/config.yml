@@ -1,0 +1,5 @@
+# The starting balance amount
+starting-balance: 1000
+
+# Currency symbol
+currency-symbol: "$"

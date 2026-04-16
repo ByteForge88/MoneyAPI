@@ -10,6 +10,8 @@ use byteforge88\moneyapi\MoneyAPI;
 
 use byteforge88\moneyapi\database\Database;
 
+use byteforge88\moneyapi\utils\Utils;
+
 class Money {
     
     public function __construct(protected MoneyAPI $plugin) {
@@ -116,8 +118,8 @@ class Money {
         }
     }
     
-    public function formatAmount(int $amount) : string{
+    public function formatMoney(int $amount) : string{
         $str = number_format($amount);
-        return "$" . $str;
+        return Utils::getCurrencySymbol() . $str;
     }
 }
