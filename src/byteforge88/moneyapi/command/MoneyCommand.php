@@ -13,7 +13,7 @@ use byteforge88\moneyapi\MoneyAPI;
 /**
  * @deprecated
  * TODO: use PM6 ugly and chopped command system
- * Perhaps we use Commando for now?
+ * Perhaps we should use Commando for now?
  */
 abstract class MoneyCommand extends Command implements PluginOwned {
     
