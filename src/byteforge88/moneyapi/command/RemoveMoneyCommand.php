@@ -9,23 +9,20 @@ use pocketmine\command\utils\InvalidCommandSyntaxException;
 
 use pocketmine\player\Player;
 
-use pocketmine\Server;
-
 use byteforge88\moneyapi\MoneyAPI;
 
 use byteforge88\moneyapi\utils\Message;
 
-class PayMoneyCommand extends MoneyCommand {
+class RemoveMoneyCommand extends MoneyCommand {
     
     public function __construct(protected MoneyAPI $plugin) {
-        parent::__construct("pay", $this->plugin);
-        $this->setDescription("Pay someone money from your balance");
-        $this->setAliases(["paymoney"]);
-        $this->setUsage("/pay <player> <amount>");
-        $this->setPermission("moneyapi.pay");
+        parent::__construct("removemoney", $this->plugin);
+        $this->setDescription("Remove money from a player's balance");
+        $this->setUsage("/removemoney <player> <amount>");
+        $this->setPermission("moneyapi.removemoney");
     }
     
-    public function execute(CommandSender $sender, string $commandLabel, array $args) : void{
+    public function execute(CommandSender $sender, string $commandSender, array $args) : void{
         if (!$sender instanceof Player) {
             $sender->sendMessage((string) new Message("not-ingame"));
             return;
@@ -37,7 +34,7 @@ class PayMoneyCommand extends MoneyCommand {
         }
         
         $money = MoneyAPI::getInstance();
-        $amount = (int) $args[1];
+        $amount = (int) $amount;
         
         if ($money->isNew($args[0])) {
             $sender->sendMessage((string) new Message("player-not-found"));
@@ -54,32 +51,21 @@ class PayMoneyCommand extends MoneyCommand {
             return;
         }
         
-        $user_balance = $money->getBalance($sender);
+        $target_balance = $money->getBalance($args[0]);
         
-        if ($user_balance < $amount) {
-            $sender->sendMessage((string) new Message("user-is-broke"));
+        if ($target_balance < $amount) {
+            $sender->sendMessage((string) new Message("target-broke"));
             return;
         }
         
-        $money->removeMoney($sender, $amount);
-        $money->addMoney($args[0], $amount);
+        $money->remoneyMoney($args[0], $amount);
         
         $formatted_amount = $money->formatMoney($amount);
         
         $sender->sendMessage((string) new Message(
-            "successfully-paid-player",
+            "successfully-removed-money",
             ["{player}", "{amount}"],
-            [$sender->getName(), $formatted_amount]
+            [$args[0], $formatted_amount]
         ));
-        
-        $player = Server::getInstance()->getPlayerExact($args[0]);
-        
-        if ($player !== null) {
-            $player->sendMessage((string) new Message(
-                "successfully-recieved-money",
-                ["{player}", "{amount}"],
-                [$player->getName(), $formatted_amount]
-            ));
-        }
     }
 }

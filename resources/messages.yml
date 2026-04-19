@@ -1,26 +1,62 @@
+# You may use "&" for the color code
+# e.g. "&1&4This is bold and dark red"
+
 # Message when a user tries to run a command when they're not in-game
 not-ingame: "use this command in-game!"
 
 # Message displaying your current balance
-user-balance: "You currently have {balance}!"
+# Available tags:
+# - {balance} = the user's balance
+user-balance: "You currently have &a{balance}&f!"
 
 # Message displaying someone else's balance
-other-balance: "{player} balance: {balance}"
+# Available tags:
+# - {balance} = The target balance
+# - {player} = The target player
+other-balance: "{player} balance: &a{balance}"
 
 # Message when a player doesn't exist
-player-not-found: "Player not found!"
+player-not-found: "&cPlayer not found!"
 
 # Message when amount inputed in the command line is not an integer
-amount-must-be-numeric: "Amount must be a number!"
+amount-must-be-numeric: "&cAmount must be a number!"
 
 # Message when amount inputed in the command line is negative
-amount-must-be-positive: "Amount must be larger than 0!"
+amount-must-be-positive: "&cAmount must be larger than 0!"
 
 # Message when a player tries to pay someone but they're broke
-user-is-broke: "You don't have enough to pay this person"
+user-is-broke: "&cYou don't have enough to pay this person"
 
 # Message when a player successfully pay's another player
-successfully-paid-player: "You have paid {player} {amount}!"
+# Available tags:
+# - {amount} = The amount paid
+# - {player} = The target player
+successfully-paid-player: "You have paid {player} &a{amount}&f!"
 
 # Message when a player successfully recieved payment
-successfully-recieved-money: "{player} has paid you {amount}!"
+# Available tags:
+# - {amount} = The amount recieved
+# - {player} = The target player
+successfully-recieved-money: "{player} has paid you &a{amount}&f!"
+
+# Message when an operator adds money to a player's balance
+# Available tags:
+# - {amount} = The amount added to balance
+# - {player} = The target player
+successfully-added-money: "Successfully added &a{amount}&f to {player} balance!"
+
+# Message when an operator successfully removes money from a player's balance
+# Message when an operator successfully sets a player's balance
+# Available tags:
+# - {amount} = The amount removed
+# - {player} = The target player
+successfully-removed-money: "Successfully removed &a{amount}&f from {player} balance!"
+
+# Message when an operator successfully sets a player's balance
+# Available tags:
+# - {amount} = The amount set
+# - {player} = The target player
+successfully-set-balance: "Successfully set the balance of {player} to &a{amount}&f!"
+
+# Message when an operator tries to remove money from a player but they're broke
+target-broke: "&cThis player doesn't have enough money to take!"

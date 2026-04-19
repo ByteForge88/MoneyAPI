@@ -16,6 +16,10 @@ use byteforge88\moneyapi\database\Database;
 
 use byteforge88\moneyapi\command\BalanceCommand;
 use byteforge88\moneyapi\command\SeeBalanceCommand;
+use byteforge88\moneyapi\command\PayMoneyCommand;
+use byteforge88\moneyapi\command\AddMoneyCommand;
+use byteforge88\moneyapi\command\RemoveMoneyCommand;
+use byteforge88\moneyapi\command\SetBalanceCommand;
 
 class MoneyAPI extends PluginBase {
     
@@ -42,7 +46,11 @@ class MoneyAPI extends PluginBase {
         
         $server->getCommandMap()->registerAll("MoneyAPI", [
             new BalanceCommand($this),
-            new SeeBalanceCommand($this)
+            new SeeBalanceCommand($this),
+            new PayMoneyCommand($this),
+            new AddMoneyCommand($this),
+            new RemoveMoneyCommand($this),
+            new SetBalanceCommand($this)
         ]);
     }
     

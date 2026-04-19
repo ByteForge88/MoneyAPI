@@ -11,3 +11,9 @@ permissions:
     default: true
   moneyapi.pay:
     default: true
+  moneyapi.addmoney:
+    default: op
+  moneyapi.removemoney:
+    default: op
+  moneyapi.setbalance:
+    default: op
